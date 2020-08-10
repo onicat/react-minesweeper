@@ -1,7 +1,9 @@
-import Board from "./Board";
+import Board from './Board'
+import Settings from './Settings'
 
 interface Store {
-  board: Board
+  board: Board,
+  settings: Settings
 }
 
 export default Store;
