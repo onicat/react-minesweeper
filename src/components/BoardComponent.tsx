@@ -2,57 +2,30 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 import { getBoard } from 'redux/selectors';
-import Board from 'models/Board';
 import Store from 'models/Store';
-import CellComponent from './CellComponent';
+import Board from 'models/Board';
 import RowComponent from './RowComponent';
 
 interface BoardComponentProps {
-  board: Board;
-  width: number;
-  height: number;
+  board: Board
 }
 
 const BoardComponent = ({
-  board,
-  width,
-  height
+  board
 }: BoardComponentProps) => {
-  const renderRows = () => {
-    const rows = [];
-
-    for (let rowIndex = 0; rowIndex < height; rowIndex++) {
-      const cells = [];
-
-      for (let cellIndex = 0; cellIndex < width; cellIndex++) {
-        const cell = board[rowIndex][cellIndex];
-        
-        cells.push(
-          <CellComponent 
-            cell={cell}
-            key={cellIndex}
-          />
-        );
-      }
-
-      rows.push(
-        <RowComponent
-          cells={cells}
-          key={rowIndex}
-        />
-      );
-    }
-
-    return rows;
-  };
+  const rows = [];
   
+  for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
+    rows.push(<RowComponent row={board[rowIndex]}/>);
+  }
+
   return (
     <table>
       <tbody>
-        {renderRows()}
+        {rows}
       </tbody>
     </table>
-  );
+  )
 };
 
 const mapStateToProps = (state: Store) => ({

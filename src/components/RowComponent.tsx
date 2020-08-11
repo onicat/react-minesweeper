@@ -1,13 +1,26 @@
 import React from 'react'
 
+import Cell from 'models/Cell'
+import CellComponent from './CellComponent';
+
 interface RowComponentProps {
-  cells: JSX.Element[]
+  row: Cell[];
 }
 
 const RowComponent = ({
-  cells
+  row
 }: RowComponentProps) => {
-  return <tr>{cells}</tr>
+  const cells = [];
+
+  for (let cellIndex = 0; cellIndex < row.length; cellIndex++) {
+    cells.push(<CellComponent cell={row[cellIndex]}/>);
+  }
+  
+  return (
+    <tr>
+      {cells}
+    </tr>
+  )
 };
 
 export default RowComponent;

@@ -9,7 +9,9 @@ interface CellComponentProps {
 const CellComponent = ({
   cell
 }: CellComponentProps) => {
-  return <td></td>
-};
+  return (
+    <td></td>
+  )
+}
 
 export default CellComponent;

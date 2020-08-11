@@ -14,10 +14,7 @@ const App = ({
   settings
 }: AppProps) => {
   return (
-    <BoardComponent 
-      width={settings.boardWidth}
-      height={settings.boardHeight}
-    />
+    <BoardComponent/>
   );
 };
 
