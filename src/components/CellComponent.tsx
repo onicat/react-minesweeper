@@ -13,9 +13,7 @@ interface CellComponentProps {
   cell: Cell
 }
 
-const CellComponent = ({
-  cell
-}: CellComponentProps) => {
+const CellComponent = ({cell}: CellComponentProps) => {
   return (
     <StyledCell></StyledCell>
   )

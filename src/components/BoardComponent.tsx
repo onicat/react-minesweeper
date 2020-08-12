@@ -10,9 +10,7 @@ interface BoardComponentProps {
   board: Board
 }
 
-const BoardComponent = ({
-  board
-}: BoardComponentProps) => {
+const BoardComponent = ({board}: BoardComponentProps) => {
   const rows = [];
   
   for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {

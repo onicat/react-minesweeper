@@ -7,9 +7,7 @@ interface RowComponentProps {
   row: Cell[];
 }
 
-const RowComponent = ({
-  row
-}: RowComponentProps) => {
+const RowComponent = ({row}: RowComponentProps) => {
   const cells = [];
 
   for (let cellIndex = 0; cellIndex < row.length; cellIndex++) {
