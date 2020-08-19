@@ -1,1 +1,11 @@
-export default null;
+import actionTypes from "./actionTypes";
+import Coordinates from "models/Coordinates";
+
+export const installMines = (
+  minesNumber: number,
+  excludedArea: Coordinates[]
+) => ({
+  type: actionTypes.INSTALL_MINES,
+  minesNumber,
+  excludedArea
+});
