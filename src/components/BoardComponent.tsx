@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import { getBoard } from 'redux/selectors';
 import Store from 'models/Store';
@@ -19,6 +20,10 @@ interface BoardComponentProps {
   changeStage: Function;
   openCells: Function;
 }
+
+const StyledBoardComponent = styled.table`
+  text-align: center;
+`;
 
 const BoardComponent = ({
   board,
@@ -61,11 +66,11 @@ const BoardComponent = ({
   }
 
   return (
-    <table>
+    <StyledBoardComponent>
       <tbody>
         {rows}
       </tbody>
-    </table>
+    </StyledBoardComponent>
   )
 };
 
