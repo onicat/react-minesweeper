@@ -48,6 +48,33 @@ const board = produce((state, action) => {
           }
         }
       }
+
+      break;
+    }
+
+    case actionTypes.OPEN_CELLS: {
+      const readyToBeOpen = [action.startCoordinates];
+
+      while (readyToBeOpen.length > 0) {
+        const cellCoordinates = readyToBeOpen.pop();
+        const cell = state[cellCoordinates[0]][cellCoordinates[1]];
+        
+        if (cell.isOpen) continue;
+
+        if (cell.status > 0) {
+          cell.isOpen = true;
+        } else {
+          const cellArea = getArea(
+            cellCoordinates,
+            {height: state.length, width: state[0].length},
+            false
+          );
+
+          readyToBeOpen.push(...cellArea);
+        }
+      }
+
+      break;
     }
   }
 }, initialState);
