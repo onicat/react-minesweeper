@@ -9,3 +9,8 @@ export const installMines = (
   minesNumber,
   excludedArea
 });
+
+export const openCells = (startCoordinates: Coordinates) => ({
+  type: actionTypes.OPEN_CELLS,
+  startCoordinates
+});
