@@ -1,5 +1,6 @@
 interface Cell {
-  isOpen: boolean
+  status: number;
+  isOpen: boolean;
 }
 
 export default Cell;
