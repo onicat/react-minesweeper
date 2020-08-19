@@ -14,3 +14,8 @@ export const openCells = (startCoordinates: Coordinates) => ({
   type: actionTypes.OPEN_CELLS,
   startCoordinates
 });
+
+export const changeState = (stage: string) => ({
+  type: actionTypes.CHANGE_STAGE,
+  stage
+});
