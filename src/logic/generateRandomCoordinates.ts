@@ -19,7 +19,7 @@ const hasCoordinates = (
 const generateRandomCoordinates = (
   boardWidth: number,
   boardHeight: number,
-  excludeArea: Coordinates[]
+  excludedArea: Coordinates[]
 ) => {
   while (true) {
     const randomCoordinates: Coordinates = [
@@ -27,7 +27,7 @@ const generateRandomCoordinates = (
       Math.floor(Math.random() * (boardWidth + 1))
     ];
 
-    if (!hasCoordinates(excludeArea, randomCoordinates)) {
+    if (!hasCoordinates(excludedArea, randomCoordinates)) {
       return randomCoordinates;
     }
   }
