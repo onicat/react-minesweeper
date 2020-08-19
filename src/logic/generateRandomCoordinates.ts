@@ -23,8 +23,8 @@ const generateRandomCoordinates = (
 ) => {
   while (true) {
     const randomCoordinates: Coordinates = [
-      Math.floor(Math.random() * (boardHeight + 1)),
-      Math.floor(Math.random() * (boardWidth + 1))
+      Math.floor(Math.random() * boardHeight),
+      Math.floor(Math.random() * boardWidth)
     ];
 
     if (!hasCoordinates(excludedArea, randomCoordinates)) {
