@@ -18,16 +18,32 @@ interface CellComponentProps {
   getCellClickHandler: Function;
 }
 
+const StyledIcon = styled.i`
+  font-size: 1.2em;
+`;
+
 const CellComponent = ({
   cell,
   getCellClickHandler
 }: CellComponentProps) => {
+  let content = null;
+
+  if (cell.isOpen) {
+    if (cell.status > 0) {
+      content = cell.status;
+    }
+
+    if (cell.status === -1) {
+      content = <StyledIcon className='fas fa-bomb'/>
+    }
+  }
+
   return (
     <StyledCell 
       onClick={getCellClickHandler(cell.coordinates)}
       open={(cell.isOpen) ? true : false}
     >
-      {(cell.status > 0 && cell.isOpen) ? cell.status : null}
+      {content}
     </StyledCell>
   )
 }
