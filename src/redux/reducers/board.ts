@@ -61,9 +61,7 @@ const board = produce((state, action) => {
         
         if (cell.isOpen) continue;
 
-        if (cell.status > 0) {
-          cell.isOpen = true;
-        } else {
+        if (cell.status === 0) {          
           const cellArea = getArea(
             cellCoordinates,
             {height: state.length, width: state[0].length},
@@ -72,6 +70,8 @@ const board = produce((state, action) => {
 
           readyToBeOpen.push(...cellArea);
         }
+
+        cell.isOpen = true;
       }
 
       break;
