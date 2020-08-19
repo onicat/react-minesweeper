@@ -1,4 +1,5 @@
 import Cell from "models/Cell";
+import Coordinates from "models/Coordinates";
 
 // Cell status:
 // 0 - empty
@@ -6,10 +7,11 @@ import Cell from "models/Cell";
 // -1 - mine
 
 class CellCreator {
-  create(): Cell {
+  create(coordinates: Coordinates): Cell {
     return {
       status: 0,
-      isOpen: false
+      isOpen: false,
+      coordinates
     }
   }
 }
