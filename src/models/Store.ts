@@ -3,7 +3,8 @@ import Settings from './Settings'
 
 interface Store {
   board: Board,
-  settings: Settings
+  settings: Settings,
+  stage: string
 }
 
 export default Store;
