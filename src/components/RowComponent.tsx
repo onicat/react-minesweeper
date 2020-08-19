@@ -5,13 +5,22 @@ import CellComponent from './CellComponent';
 
 interface RowComponentProps {
   row: Cell[];
+  getCellClickHandler: Function;
 }
 
-const RowComponent = ({row}: RowComponentProps) => {
+const RowComponent = ({
+  row,
+  getCellClickHandler
+}: RowComponentProps) => {
   const cells = [];
 
   for (let cellIndex = 0; cellIndex < row.length; cellIndex++) {
-    cells.push(<CellComponent cell={row[cellIndex]}/>);
+    cells.push(
+      <CellComponent 
+        cell={row[cellIndex]}
+        getCellClickHandler={getCellClickHandler}
+      />
+    );
   }
   
   return (

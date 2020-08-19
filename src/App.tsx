@@ -4,22 +4,25 @@ import { connect } from 'react-redux';
 import BoardComponent from 'components/BoardComponent';
 import Settings from 'models/Settings'
 import Store from 'models/Store';
-import { getSettings } from 'redux/selectors';
+import { getSettings, getStage } from 'redux/selectors';
 
 interface AppProps  {
-  settings: Settings
+  settings: Settings;
+  stage: string;
 }
 
 const App = ({
-  settings
+  settings,
+  stage
 }: AppProps) => {
   return (
-    <BoardComponent/>
+    <BoardComponent stage={stage} settings={settings}/>
   );
 };
 
 const mapStateToProps = (state: Store) => ({
-  settings: getSettings(state)
+  settings: getSettings(state),
+  stage: getStage(state)
 });
 
 export default connect(
