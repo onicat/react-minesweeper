@@ -50,6 +50,9 @@ const BoardComponent = ({
 
     if (stage === stages.IN_GAME) {
       return () => {
+        const targetCell = board[cellCoordinates[0]][cellCoordinates[1]];
+        
+        if (targetCell.isOpen) return;
         openCells(cellCoordinates);
       }
     }
