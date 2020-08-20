@@ -23,3 +23,8 @@ export const changeStage = (stage: string) => ({
 export const showMines = () => ({
   type: actionTypes.SHOW_MINES
 });
+
+export const blowUpCell = (coordinates: Coordinates) => ({
+  type: actionTypes.BLOW_UP_CELL,
+  coordinates
+});

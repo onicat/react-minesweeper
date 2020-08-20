@@ -2,7 +2,8 @@ enum actionTypes {
   INSTALL_MINES = 'INSTALL_MINES',
   OPEN_CELLS = 'OPEN_CELLS',
   CHANGE_STAGE = 'CHANGE_STAGE',
-  SHOW_MINES = 'SHOW_MINES'
+  SHOW_MINES = 'SHOW_MINES',
+  BLOW_UP_CELL = 'BLOW_UP_CELL'
 }
 
 export default actionTypes;
