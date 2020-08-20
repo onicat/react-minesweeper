@@ -13,8 +13,8 @@ class BoardCreator {
       const row: Cell[] = [];
       
       for (let cellIndex = 0; cellIndex < boardWidth; cellIndex++) {
-        const coordinates: Coordinates = [rowIndex, cellIndex];
-        const cell: Cell = cellCreator.create(coordinates);
+        const coordinates: Coordinates = [rowIndex, cellIndex]; //need to remove
+        const cell: Cell = cellCreator.create(rowIndex, cellIndex, coordinates);
 
         row.push(cell);
       }

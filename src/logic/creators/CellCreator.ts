@@ -8,11 +8,13 @@ import Coordinates from "models/Coordinates";
 // -2 - explosion
 
 class CellCreator {
-  create(coordinates: Coordinates): Cell {
+  create(rowIndex: number, cellIndex: number, coordinates: Coordinates): Cell {
     return {
       status: 0,
       isOpen: false,
-      coordinates
+      coordinates,
+      rowIndex,
+      cellIndex
     }
   }
 }
