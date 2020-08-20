@@ -1,5 +1,4 @@
 import Cell from "models/Cell";
-import Coordinates from "models/Coordinates";
 
 // Cell status:
 // 0 - empty
@@ -8,11 +7,10 @@ import Coordinates from "models/Coordinates";
 // -2 - explosion
 
 class CellCreator {
-  create(rowIndex: number, cellIndex: number, coordinates: Coordinates): Cell {
+  create(rowIndex: number, cellIndex: number): Cell {
     return {
       status: 0,
       isOpen: false,
-      coordinates,
       rowIndex,
       cellIndex
     }

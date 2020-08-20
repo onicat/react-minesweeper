@@ -1,7 +1,6 @@
 import Board from "models/Board";
 import Cell from "models/Cell";
 import CellCreator from "./CellCreator";
-import Coordinates from "models/Coordinates";
 
 const cellCreator = new CellCreator();
 
@@ -13,8 +12,7 @@ class BoardCreator {
       const row: Cell[] = [];
       
       for (let cellIndex = 0; cellIndex < boardWidth; cellIndex++) {
-        const coordinates: Coordinates = [rowIndex, cellIndex]; //need to remove
-        const cell: Cell = cellCreator.create(rowIndex, cellIndex, coordinates);
+        const cell: Cell = cellCreator.create(rowIndex, cellIndex);
 
         row.push(cell);
       }

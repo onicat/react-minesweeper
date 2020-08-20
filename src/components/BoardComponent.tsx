@@ -7,10 +7,10 @@ import Store from 'models/Store';
 import Board from 'models/Board';
 import RowComponent from './RowComponent';
 import { blowUpCell, showMines, installMines, changeStage, openCells } from 'redux/actions';
-import Coordinates from 'models/Coordinates';
 import getArea from 'logic/getArea';
 import Settings from 'models/Settings';
 import { stages } from 'logic/constants';
+import Cell from 'models/Cell';
 
 interface BoardComponentProps {
   board: Board;
@@ -39,32 +39,30 @@ const BoardComponent = ({
   showMines,
   blowUpCell
 }: BoardComponentProps) => {
-  const getCellClickHandler = (cellCoordinates: Coordinates) => {
+  const getCellClickHandler = (cell: Cell) => {
     if (stage === stages.BEFORE_START) {      
       return () => {
-        const excludedArea = getArea(
-          cellCoordinates,
-          {width: settings.boardWidth, height: settings.boardHeight}
-        );
+        // Works with bag, because board there is object, but
+        // board in reducer is Proxy thanks to Immer.js.
+        // Need fix
+        const excludedArea = getArea(cell, board);
         
         installMines(settings.minesNumber, excludedArea);
         changeStage(stages.IN_GAME);
-        openCells(cellCoordinates);
+        openCells(cell);
       }
     }
 
     if (stage === stages.IN_GAME) {
-      return () => {
-        const targetCell = board[cellCoordinates[0]][cellCoordinates[1]];
-        
-        if (targetCell.isOpen) return;
-        if (targetCell.status === -1) {
-          blowUpCell(cellCoordinates);
-          openCells(cellCoordinates);
+      return () => {        
+        if (cell.isOpen) return;
+        if (cell.status === -1) {
+          blowUpCell(cell);
+          openCells(cell);
           showMines();
           changeStage(stages.LOSING);
         } else {
-          openCells(cellCoordinates);
+          openCells(cell);
         }
       }
     }

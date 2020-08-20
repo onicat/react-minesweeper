@@ -1,18 +1,18 @@
 import actionTypes from "./actionTypes";
-import Coordinates from "models/Coordinates";
+import Cell from "models/Cell";
 
 export const installMines = (
   minesNumber: number,
-  excludedArea: Coordinates[]
+  excludedArea: Set<Cell>
 ) => ({
   type: actionTypes.INSTALL_MINES,
   minesNumber,
   excludedArea
 });
 
-export const openCells = (startCoordinates: Coordinates) => ({
+export const openCells = (cell: Cell) => ({
   type: actionTypes.OPEN_CELLS,
-  startCoordinates
+  cell
 });
 
 export const changeStage = (stage: string) => ({
@@ -24,7 +24,7 @@ export const showMines = () => ({
   type: actionTypes.SHOW_MINES
 });
 
-export const blowUpCell = (coordinates: Coordinates) => ({
+export const blowUpCell = (cell: Cell) => ({
   type: actionTypes.BLOW_UP_CELL,
-  coordinates
+  cell
 });
