@@ -90,6 +90,14 @@ const board = produce((state, action) => {
  
       break;
     }
+
+    case actionTypes.BLOW_UP_CELL: {
+      let cell = state[action.coordinates[0]][action.coordinates[1]];
+      
+      cell.status = -2;
+      
+      break;
+    }
   }
 }, initialState);
 

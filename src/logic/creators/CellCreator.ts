@@ -5,6 +5,7 @@ import Coordinates from "models/Coordinates";
 // 0 - empty
 // 1-9 - with number
 // -1 - mine
+// -2 - explosion
 
 class CellCreator {
   create(coordinates: Coordinates): Cell {
