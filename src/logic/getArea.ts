@@ -22,7 +22,6 @@ const getArea = (
       area.add(board[rowIndex][cellIndex]);
     }
   }
-  console.log(area);
 
   return area;
 };
