@@ -19,3 +19,7 @@ export const changeStage = (stage: string) => ({
   type: actionTypes.CHANGE_STAGE,
   stage
 });
+
+export const showBombs = () => ({
+  type: actionTypes.SHOW_BOMBS
+});
