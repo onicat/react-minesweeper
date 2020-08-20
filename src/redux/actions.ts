@@ -20,6 +20,6 @@ export const changeStage = (stage: string) => ({
   stage
 });
 
-export const showBombs = () => ({
-  type: actionTypes.SHOW_BOMBS
+export const showMines = () => ({
+  type: actionTypes.SHOW_MINES
 });
