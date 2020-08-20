@@ -4,8 +4,9 @@ import BoardCreator from 'logic/creators/BoardCreator'
 import Board from 'models/Board';
 import { initialSettings } from 'logic/constants';
 import actionTypes from 'redux/actionTypes';
-import generateRandomCoordinates from 'logic/generateRandomCoordinates';
 import getArea from 'logic/getArea';
+import getRandomCell from 'logic/getRandomCell';
+import Cell from 'models/Cell';
 
 const boardCreator = new BoardCreator();
 const initialState: Board = boardCreator.create(
@@ -16,35 +17,23 @@ const initialState: Board = boardCreator.create(
 const board = produce((state, action) => {
   switch (action.type) {
     case actionTypes.INSTALL_MINES: {
-      const minesCoordinates = [];
+      const minesCells: Set<Cell> = new Set();
 
-      while (minesCoordinates.length < action.minesNumber) {
-        const randomCoordinates = generateRandomCoordinates(
-          state.length,
-          state[0].length,
-          action.excludedArea
-        );
-
-        const randomCell = state[randomCoordinates[0]][randomCoordinates[1]];
+      while (minesCells.size < action.minesNumber) {
+        const randomCell = getRandomCell(state, action.excludedArea);
 
         if (randomCell.status !== -1) {
           randomCell.status = -1;
-          minesCoordinates.push(randomCoordinates);
+          minesCells.add(randomCell);
         }
       }
 
-      for (let mineCoordinates of minesCoordinates) {
-        const mineArea = getArea(
-          mineCoordinates,
-          {height: state.length, width: state[0].length},
-          false
-        );
+      for (let mineCell of minesCells.values()) {
+        const mineArea = getArea(mineCell, state, false);
 
-        for (let areaCellCoordinates of mineArea) {
-          const cell = state[areaCellCoordinates[0]][areaCellCoordinates[1]];
-
-          if (cell.status !== -1) {
-            cell.status++;
+        for (let areaCell of mineArea.values()) {
+          if (areaCell.status !== -1) {
+            areaCell.status++;
           }
         }
       }
@@ -53,20 +42,17 @@ const board = produce((state, action) => {
     }
 
     case actionTypes.OPEN_CELLS: {
-      const readyToBeOpen = [action.startCoordinates];
+      const readyToBeOpen = [
+        state[action.cell.rowIndex][action.cell.cellIndex]
+      ];
 
       while (readyToBeOpen.length > 0) {
-        const cellCoordinates = readyToBeOpen.pop();
-        const cell = state[cellCoordinates[0]][cellCoordinates[1]];
+        const cell = readyToBeOpen.pop();
         
         if (cell.isOpen) continue;
 
         if (cell.status === 0) {          
-          const cellArea = getArea(
-            cellCoordinates,
-            {height: state.length, width: state[0].length},
-            false
-          );
+          const cellArea = getArea(cell, state, false);
 
           readyToBeOpen.push(...cellArea);
         }
@@ -92,7 +78,7 @@ const board = produce((state, action) => {
     }
 
     case actionTypes.BLOW_UP_CELL: {
-      let cell = state[action.coordinates[0]][action.coordinates[1]];
+      let cell = state[action.cell.rowIndex][action.cell.cellIndex];
       
       cell.status = -2;
       

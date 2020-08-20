@@ -43,7 +43,7 @@ const CellComponent = ({
 
   return (
     <StyledCell 
-      onClick={getCellClickHandler(cell.coordinates)}
+      onClick={getCellClickHandler(cell)}
       open={(cell.isOpen) ? true : false}
     >
       {content}

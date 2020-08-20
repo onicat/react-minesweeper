@@ -1,31 +1,28 @@
-import Coordinates from "models/Coordinates";
-
-interface BoardSizes {
-  width: number;
-  height: number
-}
+import Board from "models/Board";
+import Cell from "models/Cell";
 
 const getArea = (
-  targetCoordinates: Coordinates,
-  boardSizes: BoardSizes,
+  cell: Cell,
+  board: Board,
   includeCenter = true
-): Coordinates[] => {
-  const area: Coordinates[] = [];
+): Set<Cell> => {
+  const area: Set<Cell> = new Set();
   
   for (let rowOffset = -1; rowOffset <= 1; rowOffset++) {
-    const rowIndex = targetCoordinates[0] + rowOffset;
+    const rowIndex = cell.rowIndex + rowOffset;
     
-    if (rowIndex < 0 || rowIndex >= boardSizes.height) continue; 
+    if (rowIndex < 0 || rowIndex >= board.length) continue; 
 
-    for (let colOffset = -1; colOffset <= 1; colOffset++) {
-      const colIndex = targetCoordinates[1] + colOffset;
+    for (let cellOffset = -1; cellOffset <= 1; cellOffset++) {
+      const cellIndex = cell.cellIndex + cellOffset;
 
-      if (colIndex < 0 || colIndex >= boardSizes.width) continue;
-      if (rowOffset === 0 && colOffset === 0 && !includeCenter) continue; 
+      if (cellIndex < 0 || cellIndex >= board[0].length) continue;
+      if (rowOffset === 0 && cellOffset === 0 && !includeCenter) continue; 
 
-      area.push([rowIndex, colIndex]);
+      area.add(board[rowIndex][cellIndex]);
     }
   }
+  console.log(area);
 
   return area;
 };
