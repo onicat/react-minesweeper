@@ -6,7 +6,7 @@ import { getBoard } from 'redux/selectors';
 import Store from 'models/Store';
 import Board from 'models/Board';
 import RowComponent from './RowComponent';
-import { installMines, changeStage, openCells } from 'redux/actions';
+import { showMines, installMines, changeStage, openCells } from 'redux/actions';
 import Coordinates from 'models/Coordinates';
 import getArea from 'logic/getArea';
 import Settings from 'models/Settings';
@@ -19,6 +19,7 @@ interface BoardComponentProps {
   installMines: Function;
   changeStage: Function;
   openCells: Function;
+  showMines: Function;
 }
 
 const StyledBoardComponent = styled.table`
@@ -32,7 +33,8 @@ const BoardComponent = ({
   stage,
   installMines,
   changeStage,
-  openCells
+  openCells,
+  showMines
 }: BoardComponentProps) => {
   const getCellClickHandler = (cellCoordinates: Coordinates) => {
     if (stage === stages.BEFORE_START) {      
@@ -53,9 +55,16 @@ const BoardComponent = ({
         const targetCell = board[cellCoordinates[0]][cellCoordinates[1]];
         
         if (targetCell.isOpen) return;
-        openCells(cellCoordinates);
+        if (targetCell.status === -1) {
+          showMines();
+          changeStage(stages.LOSING);
+        } else {
+          openCells(cellCoordinates);
+        }
       }
     }
+
+    return null;
   };
 
   const rows = [];
@@ -84,5 +93,5 @@ const mapStateToProps = (state: Store) => ({
 
 export default connect(
   mapStateToProps,
-  {installMines, changeStage, openCells}
+  {showMines, installMines, changeStage, openCells}
 )(BoardComponent);
