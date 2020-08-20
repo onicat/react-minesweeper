@@ -1,13 +1,9 @@
 import actionTypes from "./actionTypes";
 import Cell from "models/Cell";
 
-export const installMines = (
-  minesNumber: number,
-  excludedArea: Set<Cell>
-) => ({
+export const installMines = (cells: Set<Cell>) => ({
   type: actionTypes.INSTALL_MINES,
-  minesNumber,
-  excludedArea
+  cells
 });
 
 export const openCells = (cell: Cell) => ({

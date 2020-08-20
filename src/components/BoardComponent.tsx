@@ -11,6 +11,7 @@ import getArea from 'logic/getArea';
 import Settings from 'models/Settings';
 import { stages } from 'logic/constants';
 import Cell from 'models/Cell';
+import getRandomCells from 'logic/getRandomCells';
 
 interface BoardComponentProps {
   board: Board;
@@ -42,12 +43,12 @@ const BoardComponent = ({
   const getCellClickHandler = (cell: Cell) => {
     if (stage === stages.BEFORE_START) {      
       return () => {
-        // Works with bag, because board there is object, but
-        // board in reducer is Proxy thanks to Immer.js.
-        // Need fix
         const excludedArea = getArea(cell, board);
-        
-        installMines(settings.minesNumber, excludedArea);
+        const minesCells = getRandomCells(
+          settings.minesNumber, board, excludedArea
+        );
+
+        installMines(minesCells);
         changeStage(stages.IN_GAME);
         openCells(cell);
       }

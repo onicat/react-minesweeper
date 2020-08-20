@@ -5,8 +5,6 @@ import Board from 'models/Board';
 import { initialSettings } from 'logic/constants';
 import actionTypes from 'redux/actionTypes';
 import getArea from 'logic/getArea';
-import getRandomCell from 'logic/getRandomCell';
-import Cell from 'models/Cell';
 
 const boardCreator = new BoardCreator();
 const initialState: Board = boardCreator.create(
@@ -17,18 +15,11 @@ const initialState: Board = boardCreator.create(
 const board = produce((state, action) => {
   switch (action.type) {
     case actionTypes.INSTALL_MINES: {
-      const minesCells: Set<Cell> = new Set();
-
-      while (minesCells.size < action.minesNumber) {
-        const randomCell = getRandomCell(state, action.excludedArea);
-
-        if (randomCell.status !== -1) {
-          randomCell.status = -1;
-          minesCells.add(randomCell);
-        }
-      }
+      const minesCells = action.cells;
 
       for (let mineCell of minesCells.values()) {
+        state[mineCell.rowIndex][mineCell.cellIndex].status = -1;
+
         const mineArea = getArea(mineCell, state, false);
 
         for (let areaCell of mineArea.values()) {
