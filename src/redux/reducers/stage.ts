@@ -12,6 +12,7 @@ const stage = produce((state, action) => {
       switch (action.stage) {
         case stages.BEFORE_START: return stages.BEFORE_START;
         case stages.IN_GAME: return stages.IN_GAME;
+        case stages.LOSING: return stages.LOSING;
       }
 
       break;
