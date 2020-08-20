@@ -76,6 +76,20 @@ const board = produce((state, action) => {
 
       break;
     }
+
+    case actionTypes.SHOW_MINES: {
+      for (let rowIndex = 0; rowIndex < state.length; rowIndex++) {
+        for (let cellIndex = 0; cellIndex < state[rowIndex].length; cellIndex++) {
+          const cell = state[rowIndex][cellIndex];
+
+          if (cell.status === -1) {
+            cell.isOpen = true;
+          }
+        }
+      }
+ 
+      break;
+    }
   }
 }, initialState);
 
