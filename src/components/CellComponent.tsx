@@ -31,10 +31,10 @@ const CellComponent = ({
   if (cell.isOpen) {
     if (cell.status > 0) {
       content = cell.status;
-    }
-
-    if (cell.status === -1) {
-      content = <StyledIcon className='fas fa-bomb'/>
+    } else if (cell.status === -1) {
+      content = <StyledIcon className='fas fa-bomb'/>;
+    } else if (cell.status === -2) {
+      content = <StyledIcon className='fab fa-gripfire'/>;
     }
   }
 
