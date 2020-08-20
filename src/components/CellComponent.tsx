@@ -9,8 +9,11 @@ const StyledCell = styled.td<{
 }>`
   width: 30px;
   height: 30px;
+  padding: 0;
   background-color: ${({open}) => (open) ? '#1976d2' : '#2196f3'};
   box-shadow: inset 0 -3px #1976d2;
+  display: inline-block;
+  margin: 1px;
 `;
 
 interface CellComponentProps {

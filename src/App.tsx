@@ -5,18 +5,27 @@ import BoardComponent from 'components/BoardComponent';
 import Settings from 'models/Settings'
 import Store from 'models/Store';
 import { getSettings, getStage } from 'redux/selectors';
+import PanelComponent from 'components/PanelComponent';
+import styled from 'styled-components';
 
 interface AppProps  {
   settings: Settings;
   stage: string;
 }
 
+const StyledApp = styled.div`
+  display: inline-block;
+`;
+
 const App = ({
   settings,
   stage
 }: AppProps) => {
   return (
-    <BoardComponent stage={stage} settings={settings}/>
+    <StyledApp>
+      <PanelComponent/>
+      <BoardComponent stage={stage} settings={settings}/>
+    </StyledApp>
   );
 };
 
