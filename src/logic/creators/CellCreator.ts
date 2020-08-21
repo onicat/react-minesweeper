@@ -11,6 +11,7 @@ class CellCreator {
     return {
       status: 0,
       isOpen: false,
+      isFlagged: false,
       rowIndex,
       cellIndex
     }
