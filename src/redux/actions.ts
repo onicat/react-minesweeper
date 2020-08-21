@@ -70,3 +70,14 @@ export const toggleFlag = (cell: Cell, value: boolean) => ({
   cell,
   value
 });
+
+export const handleFlagPlacing = (cell: Cell) => (
+  dispatch: Function,
+  getState: Function
+) => {
+  if (cell.isOpen) return;
+
+  const newFlagValue = (cell.isFlagged) ? false : true;
+
+  dispatch(toggleFlag(cell, newFlagValue));
+};
