@@ -1,5 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
+import { connect } from 'react-redux';
+
+import { restart } from 'redux/actions'
+
+interface PanelComponentProps {
+  restart: Function;
+}
 
 const StyledPanelComponent = styled.div`
   height: 40px;
@@ -8,10 +15,19 @@ const StyledPanelComponent = styled.div`
   margin: 1px;
 `;
 
-const PanelComponent = () => {
+const StyledRestartButton = styled.i`
+  font-size: 2em;
+`;
+
+const PanelComponent = ({restart}: PanelComponentProps) => {
   return (
-    <StyledPanelComponent></StyledPanelComponent>
+    <StyledPanelComponent>
+      <StyledRestartButton onClick={() => restart()} className='fas fa-grin-beam'/>
+    </StyledPanelComponent>
   )
 };
 
-export default PanelComponent;
+export default connect(
+  null,
+  {restart}
+)(PanelComponent);
