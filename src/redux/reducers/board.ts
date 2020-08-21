@@ -79,6 +79,10 @@ const board = produce((state, action) => {
 
       break;
     }
+
+    case actionTypes.RECREATE_BOARD: {
+      return boardCreator.create(action.width, action.height);
+    }
   }
 }, initialState);
 
