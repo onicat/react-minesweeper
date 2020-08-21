@@ -37,6 +37,8 @@ export const handleCellClick = (cell: Cell) => (
   const {stage, settings} = getState();
 
   if (stage === stages.BEFORE_START) {
+    if (cell.isFlagged) return;
+    
     const excludedArea = getArea(cell, getState().board);
     const minesCells = getRandomCells(
       settings.minesNumber, getState().board, excludedArea
@@ -51,7 +53,7 @@ export const handleCellClick = (cell: Cell) => (
     dispatch(removeFlags(cellsWithFlags));
     dispatch(changeStage(stages.IN_GAME));
   } else if (stage === stages.IN_GAME) {
-    if (cell.isOpen) return;
+    if (cell.isFlagged || cell.isOpen) return;
     if (cell.status === -1) {
       dispatch(blowUpCell(cell));
       
