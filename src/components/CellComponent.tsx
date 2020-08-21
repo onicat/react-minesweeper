@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux';
 
 import Cell from 'models/Cell'
+import { handleCellClick } from 'redux/actions'
 
 const StyledCell = styled.td<{
   open?: boolean,
@@ -18,7 +20,7 @@ const StyledCell = styled.td<{
 
 interface CellComponentProps {
   cell: Cell;
-  getCellClickHandler: Function;
+  handleCellClick: Function;
 }
 
 const StyledIcon = styled.i`
@@ -27,7 +29,7 @@ const StyledIcon = styled.i`
 
 const CellComponent = ({
   cell,
-  getCellClickHandler
+  handleCellClick
 }: CellComponentProps) => {
   let content = null;
 
@@ -43,7 +45,7 @@ const CellComponent = ({
 
   return (
     <StyledCell 
-      onClick={getCellClickHandler(cell)}
+      onClick={() => {handleCellClick(cell)}}
       open={(cell.isOpen) ? true : false}
     >
       {content}
@@ -51,4 +53,7 @@ const CellComponent = ({
   )
 }
 
-export default CellComponent;
+export default connect(
+  null,
+  {handleCellClick}
+)(CellComponent);

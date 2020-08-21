@@ -33,22 +33,10 @@ const board = produce((state, action) => {
     }
 
     case actionTypes.OPEN_CELLS: {
-      const readyToBeOpen = [
-        state[action.cell.rowIndex][action.cell.cellIndex]
-      ];
-
-      while (readyToBeOpen.length > 0) {
-        const cell = readyToBeOpen.pop();
-        
-        if (cell.isOpen) continue;
-
-        if (cell.status === 0) {          
-          const cellArea = getArea(cell, state, false);
-
-          readyToBeOpen.push(...cellArea);
-        }
-
-        cell.isOpen = true;
+      const cells = action.cells;
+      
+      for (let cell of cells.values()) {
+        state[cell.rowIndex][cell.cellIndex].isOpen = true;
       }
 
       break;
