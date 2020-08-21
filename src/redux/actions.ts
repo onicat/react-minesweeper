@@ -99,3 +99,10 @@ export const recreateBoard = (width: number, height: number) => ({
   width,
   height
 });
+
+export const restart = () => (dispatch: Function, getState: Function) => {
+  const {settings} = getState();
+
+  dispatch(recreateBoard(settings.boardWidth, settings.boardHeight));
+  dispatch(changeStage(stages.BEFORE_START));
+};
