@@ -25,7 +25,7 @@ const BoardComponent = ({board}: BoardComponentProps) => {
   }
 
   return (
-    <StyledBoardComponent>
+    <StyledBoardComponent onContextMenu={(event) => event.preventDefault()}>
       <tbody>
         {rows}
       </tbody>
