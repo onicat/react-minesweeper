@@ -66,7 +66,9 @@ export const handleCellClick = (cell: Cell) => (
       dispatch(changeStage(stages.LOSING));
     } else {
       const openableCells = getOpenableCellsSet(cell, getState().board);
+      const cellsWithFlags = getCellsWithFlags(openableCells);
 
+      dispatch(removeFlags(cellsWithFlags));
       dispatch(openCells(openableCells));
     }
   }
