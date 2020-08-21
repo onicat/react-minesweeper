@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { connect } from 'react-redux';
 
 import { restart } from 'redux/actions'
-import { getStage } from 'redux/selectors';
+import { getStage, getFlagsRemaining } from 'redux/selectors';
 import Store from 'models/Store';
 import { stages } from 'logic/constants';
 
 interface PanelComponentProps {
   stage: string;
+  flagsRemaining: number;
   restart: Function;
 }
 
@@ -25,6 +26,7 @@ const StyledRestartButton = styled.i`
 
 const PanelComponent = ({
   stage,
+  flagsRemaining,
   restart
 }: PanelComponentProps) => {
   let restartButtonClassName = null;
@@ -41,12 +43,14 @@ const PanelComponent = ({
         onClick={() => restart()}
         className={restartButtonClassName}
       />
+      <i>{flagsRemaining}</i>
     </StyledPanelComponent>
   )
 };
 
 const mapStateToProps = (state: Store) => ({
-  stage: getStage(state)
+  stage: getStage(state),
+  flagsRemaining: getFlagsRemaining(state)
 });
 
 export default connect(
