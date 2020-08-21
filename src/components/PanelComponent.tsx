@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { connect } from 'react-redux';
 
 import { restart } from 'redux/actions'
+import { getStage } from 'redux/selectors';
+import Store from 'models/Store';
+import { stages } from 'logic/constants';
 
 interface PanelComponentProps {
+  stage: string;
   restart: Function;
 }
 
@@ -19,15 +23,33 @@ const StyledRestartButton = styled.i`
   font-size: 2em;
 `;
 
-const PanelComponent = ({restart}: PanelComponentProps) => {
+const PanelComponent = ({
+  stage,
+  restart
+}: PanelComponentProps) => {
+  let restartButtonClassName = null;
+
+  if (stage === stages.LOSING) {
+    restartButtonClassName = 'fas fa-grimace';
+  } else {
+    restartButtonClassName = 'fas fa-grin-beam';
+  }
+  
   return (
     <StyledPanelComponent>
-      <StyledRestartButton onClick={() => restart()} className='fas fa-grin-beam'/>
+      <StyledRestartButton 
+        onClick={() => restart()}
+        className={restartButtonClassName}
+      />
     </StyledPanelComponent>
   )
 };
 
+const mapStateToProps = (state: Store) => ({
+  stage: getStage(state)
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   {restart}
 )(PanelComponent);
