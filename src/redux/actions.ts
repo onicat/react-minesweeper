@@ -65,7 +65,8 @@ export const handleCellClick = (cell: Cell) => (
   }
 };
 
-export const toggleFlag = (cell: Cell) => ({
+export const toggleFlag = (cell: Cell, value: boolean) => ({
   type: actionTypes.TOGGLE_FLAG,
-  cell
+  cell,
+  value
 });
