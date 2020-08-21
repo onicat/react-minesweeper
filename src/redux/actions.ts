@@ -63,4 +63,9 @@ export const handleCellClick = (cell: Cell) => (
       dispatch(openCells(openableCells));
     }
   }
-}
+};
+
+export const toggleFlag = (cell: Cell) => ({
+  type: actionTypes.TOGGLE_FLAG,
+  cell
+});

@@ -3,7 +3,8 @@ enum actionTypes {
   OPEN_CELLS = 'OPEN_CELLS',
   CHANGE_STAGE = 'CHANGE_STAGE',
   SHOW_MINES = 'SHOW_MINES',
-  BLOW_UP_CELL = 'BLOW_UP_CELL'
+  BLOW_UP_CELL = 'BLOW_UP_CELL',
+  TOGGLE_FLAG = 'TOGGLE_FLAG'
 }
 
 export default actionTypes;
