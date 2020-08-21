@@ -63,6 +63,14 @@ const board = produce((state, action) => {
       
       break;
     }
+
+    case actionTypes.TOGGLE_FLAG: {
+      const cell = state[action.cell.rowIndex][action.cell.cellIndex];
+
+      cell.isFlagged = action.value;
+
+      break;
+    }
   }
 }, initialState);
 
