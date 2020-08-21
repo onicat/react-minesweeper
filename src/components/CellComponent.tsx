@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux';
 
 import Cell from 'models/Cell'
-import { handleCellClick } from 'redux/actions'
+import { handleCellClick, handleFlagPlacing } from 'redux/actions'
 
 const StyledCell = styled.td<{
   open?: boolean,
@@ -21,6 +21,7 @@ const StyledCell = styled.td<{
 interface CellComponentProps {
   cell: Cell;
   handleCellClick: Function;
+  handleFlagPlacing: Function;
 }
 
 const StyledIcon = styled.i`
@@ -29,9 +30,14 @@ const StyledIcon = styled.i`
 
 const CellComponent = ({
   cell,
-  handleCellClick
+  handleCellClick,
+  handleFlagPlacing
 }: CellComponentProps) => {
   let content = null;
+
+  if (cell.isFlagged) {
+    content = <StyledIcon className='fas fa-flag'/>;
+  }
 
   if (cell.isOpen) {
     if (cell.status > 0) {
@@ -42,10 +48,12 @@ const CellComponent = ({
       content = <StyledIcon className='fab fa-gripfire'/>;
     }
   }
+  
 
   return (
     <StyledCell 
-      onClick={() => {handleCellClick(cell)}}
+      onClick={() => handleCellClick(cell)}
+      onContextMenu={() => handleFlagPlacing(cell)}
       open={(cell.isOpen) ? true : false}
     >
       {content}
@@ -55,5 +63,5 @@ const CellComponent = ({
 
 export default connect(
   null,
-  {handleCellClick}
+  {handleCellClick, handleFlagPlacing}
 )(CellComponent);
