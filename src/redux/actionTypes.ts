@@ -4,7 +4,8 @@ enum actionTypes {
   CHANGE_STAGE = 'CHANGE_STAGE',
   SHOW_MINES = 'SHOW_MINES',
   BLOW_UP_CELL = 'BLOW_UP_CELL',
-  TOGGLE_FLAG = 'TOGGLE_FLAG'
+  TOGGLE_FLAG = 'TOGGLE_FLAG',
+  REMOVE_FLAGS = 'REMOVE_FLAGS'
 }
 
 export default actionTypes;

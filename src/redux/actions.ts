@@ -81,3 +81,8 @@ export const handleFlagPlacing = (cell: Cell) => (
 
   dispatch(toggleFlag(cell, newFlagValue));
 };
+
+export const removeFlags = (cells: Set<Cell>) => ({
+  type: actionTypes.REMOVE_FLAGS,
+  cells
+});
