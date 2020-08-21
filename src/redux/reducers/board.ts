@@ -71,6 +71,14 @@ const board = produce((state, action) => {
 
       break;
     }
+
+    case actionTypes.REMOVE_FLAGS: {
+      for (let cell of action.cells) {
+        state[cell.rowIndex][cell.cellIndex].isFlagged = false;
+      }
+
+      break;
+    }
   }
 }, initialState);
 
