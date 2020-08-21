@@ -21,7 +21,7 @@ const BoardComponent = ({board}: BoardComponentProps) => {
   const rows = [];
   
   for (let rowIndex = 0; rowIndex < board.length; rowIndex++) {
-    rows.push(<RowComponent row={board[rowIndex]}/>);
+    rows.push(<RowComponent key={rowIndex} row={board[rowIndex]}/>);
   }
 
   return (

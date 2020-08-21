@@ -11,7 +11,7 @@ const RowComponent = ({row}: RowComponentProps) => {
   const cells = [];
 
   for (let cellIndex = 0; cellIndex < row.length; cellIndex++) {
-    cells.push(<CellComponent cell={row[cellIndex]}/>);
+    cells.push(<CellComponent key={cellIndex} cell={row[cellIndex]}/>);
   }
   
   return (
