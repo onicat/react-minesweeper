@@ -106,6 +106,11 @@ export const removeFlags = (cells: Set<Cell>) => ({
   cells
 });
 
+export const setFlagsRemaining = (value: number) => ({
+  type: actionTypes.SET_FLAGS_REMAINIG,
+  value
+});
+
 export const recreateBoard = (width: number, height: number) => ({
   type: actionTypes.RECREATE_BOARD,
   width,
