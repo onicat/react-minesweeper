@@ -7,5 +7,6 @@ export enum initialSettings {
 export enum stages {
   BEFORE_START = 'BEFORE_START',
   IN_GAME = 'IN_GAME',
-  LOSING = 'LOSING'
+  LOSING = 'LOSING',
+  WINNING = 'WINNING'
 }
