@@ -5,6 +5,7 @@ import getArea from "logic/getArea";
 import getRandomCells from "logic/getRandomCells";
 import getOpenableCellsSet from "logic/getOpenableCellsSet";
 import getCellsWithFlags from "logic/getCellsWithFlags";
+import areAllCommonCellsOpen from "logic/areAllCommonCellsOpen";
 
 export const installMines = (cells: Set<Cell>) => ({
   type: actionTypes.INSTALL_MINES,
@@ -51,7 +52,12 @@ export const handleCellClick = (cell: Cell) => (
     
     dispatch(openCells(openableCells));
     dispatch(removeFlags(cellsWithFlags));
-    dispatch(changeStage(stages.IN_GAME));
+    
+    if (areAllCommonCellsOpen(getState().board)) {
+      dispatch(changeStage(stages.WINNING));
+    } else {
+      dispatch(changeStage(stages.IN_GAME));
+    }
   } else if (stage === stages.IN_GAME) {
     if (cell.isFlagged || cell.isOpen) return;
     if (cell.status === -1) {
@@ -70,6 +76,10 @@ export const handleCellClick = (cell: Cell) => (
 
       dispatch(removeFlags(cellsWithFlags));
       dispatch(openCells(openableCells));
+
+      if (areAllCommonCellsOpen(getState().board)) {
+        dispatch(changeStage(stages.WINNING));
+      }
     }
   }
 };
