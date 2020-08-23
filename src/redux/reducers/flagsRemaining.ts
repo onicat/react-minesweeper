@@ -13,6 +13,10 @@ const flagsRemaining = produce((state, action) => {
     case actionTypes.REMOVE_FLAGS: {
       return state + action.cells.size;
     }
+
+    case actionTypes.SET_FLAGS_REMAINIG: {
+      return action.value;
+    }
   }
 }, initialState);
 
