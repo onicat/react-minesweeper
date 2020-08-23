@@ -31,10 +31,20 @@ const PanelComponent = ({
 }: PanelComponentProps) => {
   let restartButtonClassName = null;
 
-  if (stage === stages.LOSING) {
-    restartButtonClassName = 'fas fa-grimace';
-  } else {
-    restartButtonClassName = 'fas fa-grin-beam';
+  switch (stage) {
+    case stages.LOSING: {
+      restartButtonClassName = 'fas fa-grimace';
+      break;
+    }
+
+    case stages.WINNING: {
+      restartButtonClassName = 'far fa-grin-hearts';
+      break;
+    }
+
+    default: {
+      restartButtonClassName = 'fas fa-grin-beam';
+    }
   }
   
   return (
