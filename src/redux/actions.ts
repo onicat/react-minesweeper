@@ -74,7 +74,11 @@ export const handleFlagPlacing = (cell: Cell) => (
   dispatch: Function,
   getState: Function
 ) => {
-  if (cell.isOpen) return;
+  if (
+    cell.isOpen ||
+    getState().stage === stages.LOSING ||
+    getState().stage === stages.WINNING
+  ) return;
 
   const newFlagValue = (cell.isFlagged) ? false : true;
 
