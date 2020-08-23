@@ -35,53 +35,33 @@ export const handleCellClick = (cell: Cell) => (
   dispatch: Function,
   getState: Function
 ) => {
-  const {stage, settings} = getState();
+  if (cell.isFlagged || cell.isOpen) return;
 
-  if (stage === stages.BEFORE_START) {
-    if (cell.isFlagged) return;
-    
+  if (getState().stage === stages.BEFORE_START) {
     const excludedArea = getArea(cell, getState().board);
     const minesCells = getRandomCells(
-      settings.minesNumber, getState().board, excludedArea
+      getState().settings.minesNumber, getState().board, excludedArea
     );
 
     dispatch(installMines(minesCells));
+    dispatch(changeStage(stages.IN_GAME));
+  }
 
+  if (cell.status !== -1) {
     const openableCells = getOpenableCellsSet(cell, getState().board);
     const cellsWithFlags = getCellsWithFlags(openableCells);
     
-    dispatch(openCells(openableCells));
     dispatch(removeFlags(cellsWithFlags));
-    
+    dispatch(openCells(openableCells));
+  
     if (areAllCommonCellsOpen(getState().board)) {
       dispatch(changeStage(stages.WINNING));
-    } else {
-      dispatch(changeStage(stages.IN_GAME));
     }
-  } else if (stage === stages.IN_GAME) {
-    if (cell.isFlagged || cell.isOpen) return;
-    if (cell.status === -1) {
-      dispatch(blowUpCell(cell));
-      
-      const openableCells = getOpenableCellsSet(cell, getState().board);
-      const cellsWithFlags = getCellsWithFlags(openableCells);
-      
-      dispatch(openCells(openableCells));
-      dispatch(removeFlags(cellsWithFlags));
-      dispatch(showMines());
-      dispatch(changeStage(stages.LOSING));
-    } else {
-      const openableCells = getOpenableCellsSet(cell, getState().board);
-      const cellsWithFlags = getCellsWithFlags(openableCells);
-
-      dispatch(removeFlags(cellsWithFlags));
-      dispatch(openCells(openableCells));
-
-      if (areAllCommonCellsOpen(getState().board)) {
-        dispatch(changeStage(stages.WINNING));
-      }
-    }
-  }
+  } else {
+    dispatch(showMines());
+    dispatch(blowUpCell(cell));
+    dispatch(changeStage(stages.LOSING));
+  } 
 };
 
 export const toggleFlag = (cell: Cell, value: boolean) => ({
