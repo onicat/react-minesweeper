@@ -122,4 +122,5 @@ export const restart = () => (dispatch: Function, getState: Function) => {
 
   dispatch(recreateBoard(settings.boardWidth, settings.boardHeight));
   dispatch(changeStage(stages.BEFORE_START));
+  dispatch(setFlagsRemaining(settings.minesNumber));
 };
