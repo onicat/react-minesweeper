@@ -1,6 +1,6 @@
 import actionTypes from "./actionTypes";
 import Cell from "models/Cell";
-import { stages } from "logic/constants";
+import { stages, cellStatuses } from "logic/constants";
 import getArea from "logic/getArea";
 import getRandomCells from "logic/getRandomCells";
 import getOpenableCellsSet from "logic/getOpenableCellsSet";
@@ -47,7 +47,7 @@ export const handleCellClick = (cell: Cell) => (
     dispatch(changeStage(stages.IN_GAME));
   }
 
-  if (cell.status !== -1) {
+  if (cell.status !== cellStatuses.MINE) {
     const openableCells = getOpenableCellsSet(cell, getState().board);
     const cellsWithFlags = getCellsWithFlags(openableCells);
     

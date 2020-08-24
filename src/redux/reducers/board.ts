@@ -59,7 +59,7 @@ const board = produce((state, action) => {
     case actionTypes.BLOW_UP_CELL: {
       let cell = state[action.cell.rowIndex][action.cell.cellIndex];
       
-      cell.status = -2;
+      cell.status = cellStatuses.EXPLOSION;
       
       break;
     }
