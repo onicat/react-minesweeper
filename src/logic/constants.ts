@@ -10,3 +10,9 @@ export enum stages {
   LOSING = 'LOSING',
   WINNING = 'WINNING'
 }
+
+export enum cellStatuses {
+  MINE = -1,
+  EXPLOSION = -2,
+  EMPTY = 0
+}
