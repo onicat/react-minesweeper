@@ -1,6 +1,7 @@
 import Cell from "models/Cell";
 import Board from "models/Board";
 import getArea from "./getArea";
+import { cellStatuses } from "./constants";
 
 const getOpenableCellsSet = (startsWith: Cell, board: Board): Set<Cell> => {
   const readyToBeChecked: Cell[] = [
@@ -14,7 +15,7 @@ const getOpenableCellsSet = (startsWith: Cell, board: Board): Set<Cell> => {
     if (cell === undefined) break;
     if (openableCells.has(cell)) continue;
 
-    if (cell.status === 0) {          
+    if (cell.status === cellStatuses.EMPTY) {          
       const cellArea = getArea(cell, board, false);
 
       readyToBeChecked.push(...cellArea);

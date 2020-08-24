@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Cell from 'models/Cell'
 import { handleCellClick, handleFlagPlacing } from 'redux/actions'
+import { cellStatuses } from 'logic/constants';
 
 const StyledCell = styled.td<{
   open?: boolean,
@@ -40,15 +41,14 @@ const CellComponent = ({
   }
 
   if (cell.isOpen) {
-    if (cell.status > 0) {
-      content = cell.status;
-    } else if (cell.status === -1) {
+    if (cell.status === cellStatuses.MINE) {
       content = <StyledIcon className='fas fa-bomb'/>;
-    } else if (cell.status === -2) {
+    } else if (cell.status === cellStatuses.EXPLOSION) {
       content = <StyledIcon className='fab fa-gripfire'/>;
+    } else if (cell.status !== cellStatuses.EMPTY) {
+      content = cell.status;
     }
   }
-  
 
   return (
     <StyledCell 

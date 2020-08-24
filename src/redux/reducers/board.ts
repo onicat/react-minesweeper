@@ -2,7 +2,7 @@ import { produce } from 'immer'
 
 import BoardCreator from 'logic/creators/BoardCreator'
 import Board from 'models/Board';
-import { initialSettings } from 'logic/constants';
+import { initialSettings, cellStatuses } from 'logic/constants';
 import actionTypes from 'redux/actionTypes';
 import getArea from 'logic/getArea';
 
@@ -18,12 +18,12 @@ const board = produce((state, action) => {
       const minesCells = action.cells;
 
       for (let mineCell of minesCells.values()) {
-        state[mineCell.rowIndex][mineCell.cellIndex].status = -1;
+        state[mineCell.rowIndex][mineCell.cellIndex].status = cellStatuses.MINE;
 
         const mineArea = getArea(mineCell, state, false);
 
         for (let areaCell of mineArea.values()) {
-          if (areaCell.status !== -1) {
+          if (areaCell.status !== cellStatuses.MINE) {
             areaCell.status++;
           }
         }
@@ -47,7 +47,7 @@ const board = produce((state, action) => {
         for (let cellIndex = 0; cellIndex < state[rowIndex].length; cellIndex++) {
           const cell = state[rowIndex][cellIndex];
 
-          if (cell.status === -1) {
+          if (cell.status === cellStatuses.MINE) {
             cell.isOpen = true;
           }
         }
