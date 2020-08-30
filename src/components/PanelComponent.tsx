@@ -26,7 +26,7 @@ const StyledPanelComponent = styled.div`
   align-items: center;
 `;
 
-const StyledRestartButton = styled.img`
+const StyledButton = styled.img`
   width: 40px;
 `;
 
@@ -75,7 +75,7 @@ const PanelComponent = ({
   return (
     <StyledPanelComponent>
       <StyledCounter title='Time'>0</StyledCounter>
-      <StyledRestartButton 
+      <StyledButton 
         onClick={() => restart()}
         src={restartButtonImg}
       />
