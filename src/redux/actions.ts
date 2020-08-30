@@ -35,7 +35,12 @@ export const handleCellClick = (cell: Cell) => (
   dispatch: Function,
   getState: Function
 ) => {
-  if (cell.isFlagged || cell.isOpen) return;
+  if (
+    cell.isFlagged ||
+    cell.isOpen ||
+    getState().stage === stages.LOSING ||
+    getState().stage === stages.WINNING
+  ) return;
 
   if (getState().stage === stages.BEFORE_START) {
     const excludedArea = getArea(cell, getState().board);
