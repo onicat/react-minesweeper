@@ -9,6 +9,8 @@ import { stages } from 'logic/constants';
 import inGameImg from 'img/ingame.png'
 import losingImg from 'img/losing.png'
 import winningImg from 'img/winning.png'
+import settingsImg from 'img/settings.png'
+import githubImg from 'img/github.png'
 
 interface PanelComponentProps {
   stage: string;
@@ -74,12 +76,17 @@ const PanelComponent = ({
   
   return (
     <StyledPanelComponent>
+      <StyledButton src={settingsImg}/>
       <StyledCounter title='Time'>0</StyledCounter>
       <StyledButton 
         onClick={() => restart()}
         src={restartButtonImg}
       />
       <StyledCounter title='Flags'>{flagsRemaining}</StyledCounter>
+      <StyledButton
+        src={githubImg}
+        onClick={() => window.open('https://github.com/onicat/react-minesweeper')}
+      />
     </StyledPanelComponent>
   )
 };
