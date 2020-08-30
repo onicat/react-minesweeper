@@ -1,4 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   margin: 0;
   background-color: #222226;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
 }

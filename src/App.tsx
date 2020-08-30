@@ -4,16 +4,20 @@ import BoardComponent from 'components/BoardComponent';
 import PanelComponent from 'components/PanelComponent';
 import styled from 'styled-components';
 
-const StyledApp = styled.div`
-  display: inline-block;
+const BoardContainer = styled.div`
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow: auto;
 `;
 
 const App = () => {
   return (
-    <StyledApp>
+    <React.Fragment>
       <PanelComponent/>
-      <BoardComponent/>
-    </StyledApp>
+      <BoardContainer>
+        <BoardComponent/>
+      </BoardContainer>
+    </React.Fragment>
   );
 };
 

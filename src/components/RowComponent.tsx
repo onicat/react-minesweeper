@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components';
 
 import Cell from 'models/Cell'
 import CellComponent from './CellComponent';
@@ -6,6 +7,10 @@ import CellComponent from './CellComponent';
 interface RowComponentProps {
   row: Cell[];
 }
+
+const StyledRowComponent = styled.tr`
+  white-space: nowrap;
+`;
 
 const RowComponent = ({row}: RowComponentProps) => {
   const cells = [];
@@ -15,9 +20,9 @@ const RowComponent = ({row}: RowComponentProps) => {
   }
   
   return (
-    <tr>
+    <StyledRowComponent>
       {cells}
-    </tr>
+    </StyledRowComponent>
   )
 };
 

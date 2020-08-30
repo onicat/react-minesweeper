@@ -15,6 +15,7 @@ const StyledBoardComponent = styled.table`
   text-align: center;
   font-weight: 800;
   border-spacing: 0;
+  margin: auto;
 `;
 
 const BoardComponent = ({board}: BoardComponentProps) => {
