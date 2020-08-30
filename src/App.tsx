@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const BoardContainer = styled.div`
   width: 100%;
-  height: calc(100% - 40px);
+  height: calc(100% - 70px);
   overflow: auto;
 `;
 

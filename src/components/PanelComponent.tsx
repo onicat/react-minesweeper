@@ -6,6 +6,9 @@ import { restart } from 'redux/actions'
 import { getStage, getFlagsRemaining } from 'redux/selectors';
 import Store from 'models/Store';
 import { stages } from 'logic/constants';
+import inGameImg from 'img/ingame.png'
+import losingImg from 'img/losing.png'
+import winningImg from 'img/winning.png'
 
 interface PanelComponentProps {
   stage: string;
@@ -14,14 +17,36 @@ interface PanelComponentProps {
 }
 
 const StyledPanelComponent = styled.div`
-  height: 40px;
+  height: 70px;
   background-color: #2196f3;
-  box-shadow: inset 0 -3px #1976d2;
+  box-shadow: inset 0 -5px #1976d2;
   margin: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const StyledRestartButton = styled.i`
-  font-size: 2em;
+const StyledRestartButton = styled.img`
+  width: 40px;
+`;
+
+const StyledCounter = styled.div<{
+  title: string
+}>`
+  width: 80px;
+  position: relative;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  &::before {
+    content: '${({title}) => title}';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #135ba3;
+    font-size: 0.8em;
+  }
 `;
 
 const PanelComponent = ({
@@ -29,31 +54,32 @@ const PanelComponent = ({
   flagsRemaining,
   restart
 }: PanelComponentProps) => {
-  let restartButtonClassName = null;
+  let restartButtonImg = null;
 
   switch (stage) {
     case stages.LOSING: {
-      restartButtonClassName = 'fas fa-grimace';
+      restartButtonImg = losingImg;
       break;
     }
 
     case stages.WINNING: {
-      restartButtonClassName = 'far fa-grin-hearts';
+      restartButtonImg = winningImg;
       break;
     }
 
     default: {
-      restartButtonClassName = 'fas fa-grin-beam';
+      restartButtonImg = inGameImg;
     }
   }
   
   return (
     <StyledPanelComponent>
+      <StyledCounter title='Time'>0</StyledCounter>
       <StyledRestartButton 
         onClick={() => restart()}
-        className={restartButtonClassName}
+        src={restartButtonImg}
       />
-      <i>{flagsRemaining}</i>
+      <StyledCounter title='Flags'>{flagsRemaining}</StyledCounter>
     </StyledPanelComponent>
   )
 };
