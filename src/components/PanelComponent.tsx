@@ -30,6 +30,7 @@ const StyledPanelComponent = styled.div`
 
 const StyledButton = styled.img`
   width: 40px;
+  cursor: pointer;
 `;
 
 const StyledCounter = styled.div<{
