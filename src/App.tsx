@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import BoardComponent from 'components/BoardComponent';
 import PanelComponent from 'components/PanelComponent';
 import styled from 'styled-components';
+import PopUpComponent from 'components/PopUpComponent';
+import SettingsMenuComponent from 'components/SettingsMenuComponent';
 
 const BoardContainer = styled.div`
   width: 100%;
@@ -11,12 +13,20 @@ const BoardContainer = styled.div`
 `;
 
 const App = () => {
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  
   return (
     <React.Fragment>
-      <PanelComponent/>
+      <PanelComponent openPopUp={setIsPopUpOpen.bind(null, true)}/>
       <BoardContainer>
         <BoardComponent/>
       </BoardContainer>
+      <PopUpComponent 
+        isOpen={isPopUpOpen}
+        closePopUp={setIsPopUpOpen.bind(null, false)}
+      >
+        <SettingsMenuComponent/>
+      </PopUpComponent>
     </React.Fragment>
   );
 };

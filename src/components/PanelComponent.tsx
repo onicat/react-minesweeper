@@ -16,6 +16,7 @@ interface PanelComponentProps {
   stage: string;
   flagsRemaining: number;
   restart: Function;
+  openPopUp: Function;
 }
 
 const StyledPanelComponent = styled.div`
@@ -55,7 +56,8 @@ const StyledCounter = styled.div<{
 const PanelComponent = ({
   stage,
   flagsRemaining,
-  restart
+  restart,
+  openPopUp
 }: PanelComponentProps) => {
   let restartButtonImg = null;
 
@@ -77,7 +79,10 @@ const PanelComponent = ({
   
   return (
     <StyledPanelComponent>
-      <StyledButton src={settingsImg}/>
+      <StyledButton 
+        src={settingsImg}
+        onClick={() => openPopUp()}
+      />
       <StyledCounter title='Time'>0</StyledCounter>
       <StyledButton 
         onClick={() => restart()}
