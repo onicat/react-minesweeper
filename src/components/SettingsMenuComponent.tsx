@@ -12,6 +12,7 @@ interface SettingsMenuComponentProps {
 
 const StyledMenuButton = styled.button`
   width: 200px;
+  height: 40px;
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #1976d2;
@@ -20,9 +21,15 @@ const StyledMenuButton = styled.button`
   outline: none;
   font-size: 1em;
   border-radius: 5px;
+  &:active {
+    box-shadow: none;
+    height: 38px;
+    margin-top: 12px;
+  }
 `
 
 const StyledSettingsMenuComponent = styled.div`
+  height: 300px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -63,7 +70,7 @@ const SettingsMenuComponent = ({
         Hard
       </StyledMenuButton>
       <StyledMenuButton 
-        style={{marginTop: '20px'}}
+        style={{marginTop: 'auto'}}
         onClick={() => closePopUp()}
       >
         Close
