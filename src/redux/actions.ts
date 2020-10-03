@@ -106,6 +106,13 @@ export const recreateBoard = (width: number, height: number) => ({
   height
 });
 
+export const changeSettings = (width: number, height: number, minesNumber: number) => ({
+  type: actionTypes.CHANGE_SETTINGS,
+  width,
+  height,
+  minesNumber
+});
+
 export const restart = () => (dispatch: Function, getState: Function) => {
   const {settings} = getState();
 
