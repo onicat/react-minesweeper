@@ -1,5 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import { changeSettings, restart } from 'redux/actions';
+
+interface SettingsMenuComponentProps {
+  restart: Function;
+  changeSettings: Function;
+  closePopUp: Function;
+}
 
 const StyledMenuButton = styled.button`
   width: 200px;
@@ -27,23 +36,43 @@ const StyledSettingsMenuComponent = styled.div`
   border-radius: 5px;
 `
 
-const SettingsMenuComponent = () => {
+const SettingsMenuComponent = ({
+  restart,
+  changeSettings,
+  closePopUp
+}: SettingsMenuComponentProps) => {
+  const handleDifficultyButtonClick = (
+    width: number,
+    heigth: number,
+    minesNumber: number
+  ) => {
+    changeSettings(width, heigth, minesNumber);
+    restart();
+    closePopUp();
+  };
+  
   return (
     <StyledSettingsMenuComponent>
-      <StyledMenuButton>
+      <StyledMenuButton onClick={() => {handleDifficultyButtonClick(9, 9, 10)}}>
         Easy
       </StyledMenuButton>
-      <StyledMenuButton>
+      <StyledMenuButton onClick={() => {handleDifficultyButtonClick(16, 16, 40)}}>
         Medium
       </StyledMenuButton>
-      <StyledMenuButton>
+      <StyledMenuButton onClick={() => {handleDifficultyButtonClick(30, 16, 99)}}>
         Hard
       </StyledMenuButton>
-      <StyledMenuButton style={{marginTop: '20px'}}>
+      <StyledMenuButton 
+        style={{marginTop: '20px'}}
+        onClick={() => closePopUp()}
+      >
         Close
       </StyledMenuButton>
     </StyledSettingsMenuComponent>
   )
 };
 
-export default SettingsMenuComponent;
+export default connect(
+  null,
+  {restart, changeSettings}
+)(SettingsMenuComponent);

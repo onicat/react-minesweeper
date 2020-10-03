@@ -25,7 +25,9 @@ const App = () => {
         isOpen={isPopUpOpen}
         closePopUp={setIsPopUpOpen.bind(null, false)}
       >
-        <SettingsMenuComponent/>
+        <SettingsMenuComponent
+          closePopUp={setIsPopUpOpen.bind(null, false)}
+        />
       </PopUpComponent>
     </React.Fragment>
   );
