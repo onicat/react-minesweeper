@@ -1,4 +1,11 @@
-The application is not ready yet, but you can to see progress in [dev branch](https://github.com/onicat/react-minesweeper/tree/dev).
+![Preview Image](https://github.com/onicat/react-minesweeper/blob/master/github/preview.png)
+
+# Powered by...
+
+- React & Redux with [React-redux](https://react-redux.js.org/)
+- [Immer.js](https://immerjs.github.io/immer/docs/introduction)
+- TypeScript
+- [styled-components](https://styled-components.com)
 
 # Installing
 
