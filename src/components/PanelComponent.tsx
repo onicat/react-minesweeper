@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components";
 import { connect } from 'react-redux';
 
@@ -59,7 +59,34 @@ const PanelComponent = ({
   restart,
   openPopUp
 }: PanelComponentProps) => {
+  const [time, setTime] = useState(0);
+  const timerIdRef = useRef<number>();
   let restartButtonImg = null;
+
+  useEffect(() => {
+    switch(stage) {
+      case stages.BEFORE_START: {
+        clearInterval(timerIdRef.current);
+        setTime(0);
+        break;
+      }
+
+      case stages.LOSING:
+      case stages.WINNING: {
+        clearInterval(timerIdRef.current);
+        break;
+      }
+
+      case stages.IN_GAME: {
+        timerIdRef.current = setInterval(() => setTime(time => time + 1), 1000);
+        break;
+      }
+    }
+
+    return () => {
+      clearInterval(timerIdRef.current);
+    }
+  }, [stage]);
 
   switch (stage) {
     case stages.LOSING: {
@@ -83,7 +110,7 @@ const PanelComponent = ({
         src={settingsImg}
         onClick={() => openPopUp()}
       />
-      <StyledCounter title='Time'>0</StyledCounter>
+      <StyledCounter title='Time'>{time}</StyledCounter>
       <StyledButton 
         onClick={() => restart()}
         src={restartButtonImg}
